@@ -1,5 +1,3 @@
-library focus_list_view;
-
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -238,31 +236,34 @@ class FocusListViewState extends State<FocusListView> {
   }
 
   _handleScroll() {
-    if (controller.targetIndex != null) {
-      if (controller.targetIndex <
-          (widget.itemCount ?? widget?.children?.length) &&
-          controller.targetIndex >= 0) {
-        if (controller.animate == true) {
-          controller.animateTo(widget.focusSize * controller.targetIndex,
-              duration: Duration(milliseconds: 350), curve: Curves.easeInOut);
-        } else {
-          controller.jumpTo(widget.focusSize * controller.targetIndex);
-          setState(() {
-            _rebuildItemSize();
-          });
-        }
-        controller.targetIndex = null;
-      }
-    } else {
-      setState(() {
-        _rebuildItemSize();
-      });
-    }
+//    if (controller.targetIndex != null) {
+//      int targetIndex = controller.targetIndex;
+//      controller.targetIndex = null;
+//      if (targetIndex <
+//              (widget.itemCount ?? widget?.children?.length) &&
+//          targetIndex >= 0) {
+//
+//        if (controller.animate == true) {
+//          controller.animateTo(widget.focusSize * targetIndex,
+//              duration: Duration(milliseconds: 350), curve: Curves.easeInOut);
+//        } else {
+//          controller.jumpTo(widget.focusSize * targetIndex);
+//        }
+//      }
+//    } else {
+    setState(() {
+      _rebuildItemSize();
+    });
+//    }
   }
 
   _rebuildItemSize() {
+
+    print(11111);
+
     bool indexChanged = false;
     int newFocusIndex = min(max(controller.offset ~/ widget.focusSize, 0), widget.itemCount - 1);
+    print(controller.offset);
     if (newFocusIndex != focusIndex) {
       focusIndex = newFocusIndex;
       if (widget.onIndexChanged != null) {
@@ -281,20 +282,20 @@ class FocusListViewState extends State<FocusListView> {
 }
 
 class FocusScrollController extends ScrollController {
-  int targetIndex;
-  bool animate = true;
+//  int targetIndex;
+//  bool animate = true;
+//
+//  animateToIndex(int index) {
+//    targetIndex = index;
+//    animate = true;
+//    notifyListeners();
+//  }
 
-  animateToIndex(int index) {
-    targetIndex = index;
-    animate = true;
-    notifyListeners();
-  }
-
-  jumpToIndex(int index) {
-    targetIndex = index;
-    animate = false;
-    notifyListeners();
-  }
+//  jumpToIndex(int index) {
+//    targetIndex = index;
+//    animate = false;
+//    notifyListeners();
+//  }
 }
 
 class PageEnableScrollPhysics extends ScrollPhysics {
