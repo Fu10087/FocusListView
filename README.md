@@ -52,6 +52,4 @@ FocusScrollController controller = FocusScrollController();
     ),
     ...
     
-    controller.animateToIndex(1);
-    controller.jumpToIndex(2);
 ```
